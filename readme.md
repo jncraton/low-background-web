@@ -9,4 +9,4 @@ Search the web like it's 2019
 >
 > - Wikipedia
 
-This simple tool builds search queries to search the web without AI summaries and only searching pages created before the [public release of GPT-2](https://openai.com/index/gpt-2-1-5b-release/) on November 5th, 2019.
+This simple tool builds search queries to search the web without AI summaries and only showing pages created before the [public release of GPT-2](https://openai.com/index/gpt-2-1-5b-release/) on November 5th, 2019.
