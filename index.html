@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Low-background Web</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css"
+    />
+  </head>
+
+  <body>
+    <main>
+      <h1>Low-background Web</h1>
+      <section>
+        <label
+          >Query<input id="query" placeholder="Enter search terms..."
+        /></label>
+        <a href="#" id="search_link" role="button">Search</a>
+      </section>
+      <section>
+        <details>
+          <summary>Advanced Features</summary>
+          <label
+            ><a href="https://en.wikipedia.org/wiki/Smart_bookmark"
+              >Smart bookmark</a
+            >
+            URL<input id="bookmark"
+          /></label>
+          <label
+            ><input id="assist" type="checkbox" checked />Disable AI
+            Assistance</label
+          >
+          <label><input id="no_ads" type="checkbox" />Disable Ads</label>
+        </details>
+      </section>
+    </main>
+    <script>
+      const update = () => {
+        let features = ''
+        if (assist.checked) {
+          features += 'assist=false&'
+        }
+        if (no_ads.checked) {
+          features += 'k1=-1&'
+        }
+        base_url = encodeURI(
+          `https://duckduckgo.com/?df=1970-01-02..2019-11-05&${features}q=`,
+        )
+        bookmark.value = base_url + '+%s'
+        search_link.href = base_url + '+' + encodeURIComponent(query.value)
+      }
+
+      query.addEventListener('input', update)
+      assist.addEventListener('input', update)
+      no_ads.addEventListener('input', update)
+
+      bookmark.addEventListener('input', () => {
+        sites_list = [
+          ...bookmark.value.matchAll(/site(:|%3A)(.+?)(%|\)|\+)/g),
+        ].map(i => i[2])
+        sites.value = sites_list.join('\n')
+      })
+
+      update()
+    </script>
+  </body>
+</html>
